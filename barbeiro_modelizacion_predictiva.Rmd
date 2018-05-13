@@ -1,0 +1,150 @@
+---
+title: "Actividad 3 - Modelización predictiva"
+author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
+
+date: '`r format(Sys.Date(),"%e de %B, %Y")`'
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+ 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load_libraries, include=FALSE}
+library(knitr)
+#\usepackage{mathtools}
+```
+# Introducción
+
+<div style="text-align: justify">
+
+
+En esta actividad se usará el fichero del **World Hapiness Report** ya preparado, es decir, después del preproceso que se ha realizado en la primera actividad. Recordad que con la instrucción: *read.csv("2016_clean.csv")* podéis leer el fichero en R.
+Después de preparar el fichero y realizar los análisis propios de la estadística descriptiva e inferencial, se pasará a estudiar la causalidad.
+Esta base de datos contiene 157 registros y 13 variables. Las variables son *Country, Region, HR, HS, LCI, UCI, GpC, Family, LE, Freedom, GC, Generosity, DR*. Son las mismas variables de la actividad 1 y de la actividad 2.
+</div>
+
+```{r chunck1}
+# Loading the dataframe
+df <- read.csv("2016_clean.csv")
+head(df)
+```
+
+# 1. Estadística Descriptiva
+<div style="text-align: justify">
+*A continuación, se estudiarán algunos valores centrales y de dispersión de algunas variables del fichero. Realizar los pasos que se indican a continuación.*
+</div>
+
+## 1.1 Valores centrales de HS (*Happiness Score*)
+<p style="text-align: justify">
+Calcular la media, mediana y el sumario de cinco números (de Tukey) del valor HS Happiness Score de toda la muestra. A continuación, visualizar la distribución de este valor en un diagrama de caja (boxplot) e interpretar el resultado. Finalmente, visualizar otro diagrama de caja donde se muestre el valor de HS para cada región. Es decir, en el mismo gráfico debe haber una caja para cada región representada en el fichero. Interpretar los gráficos.
+</p>
+### Respuesta
+```{r chunck2}
+
+```
+
+<p style="text-align: justify">
+text
+</p>
+
+```{r chunck3}
+
+```
+
+##1.2 Cálculos sobre Generosity e identificación de outliers
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+### Respuesta
+```{r chunck4}
+
+```
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+
+```{r chunck5}
+
+```
+
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+##1.3 Cálculos de dispersión
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+### Respuesta
+
+```{r chunck6}
+
+```
+
+
+##1.4 Cálculos de dispersión manuales
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+### Respuesta
+```{r chunck7}
+
+```
+<hr />
+# 2. Estadística Inferencial
+<div style="text-align: justify">
+
+## 2.1 Media de HS de todos los países
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+#### Respuesta
+### 2.1.1 Escribir la hipótesis nula y alternativa
+
+
+### 2.1.2 Escribir qué tipo de contraste aplicaréis
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+### 2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+```{r chunck8}
+
+```
+<p style="text-align: justify">
+aaaaaaa
+</p>
+
+
+
