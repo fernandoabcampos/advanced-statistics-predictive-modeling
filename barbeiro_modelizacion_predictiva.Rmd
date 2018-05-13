@@ -67,18 +67,14 @@ c
 
 
 #Solución del problema
-model <- lm(formula =  HS ~ GpC + LE + GC, data = df)
-model
-summary(model)
+model.quant <- lm(formula =  HS ~ GpC + LE + GC, data = df)
+model.quant
+summary(model.quant)
 ```
 
 <p style="text-align: justify">
-En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(model)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
+En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(model.quant)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
 </p>
-
-```{r chunck3}
-
-```
 
 ## 1.2 Modelo de regresión lineal múltiple (regresores cuantitativos y cualitativos)
 <p style="text-align: justify">
@@ -90,20 +86,47 @@ Evaluar la bondad del ajuste a través del coeficiente de determinación (R2) y 
 </p>
 
 ### Respuesta
-```{r chunck4}
+```{r chunck3}
+df2 <- within(df, Region <- relevel(Region, ref = "Western Europe"))
+model.qualit <- lm(formula =  df2$HS ~ df2$GpC + df2$LE + df2$GC + df2$Region, data = df2)
+model.qualit
+summary(model.qualit)$r.sq
+summary(model.qualit)
 
 ```
 <p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
+La bondad del ajuste a través del coeficiente de determinación es igual a: **`r summary(model.qualit)$r.sq`**.
 </p>
 
+
+```{r chunck4}
+models <- c("Apartado 1.1", "Apartado 1.2")
+ajuste <- c(summary(model.quant)$r.sq, summary(model.qualit)$r.sq)
+dfE <- data.frame('Apartados'=models,'Bondad del Ajuste'=as.vector(ajuste))
+
+library(pander)
+pander(dfE)
+```
+
+<p style="text-align: justify">
+Según Quick (2009) [1], de las salidas de nuestros modelos (coeficientes, entre otros) podemos determinar la ecuación de regresión completa. Por ejemplo, para el apartado 1.1 tendremos:
+</p>
+*Happinness Score* = 2.983163 + 1.238082 * GpC + 1.716585 * LE + 1.895315 * GC
+
+
+Una vez definida la ecuación, hay que echar un vistazo en los coeficientes de los dos modelos antes interpretar:
 
 ```{r chunck5}
-
+coef(model.qualit)
+coef(model.quant)
 ```
+
+
+From this output, we can determine that the intercept is -9153.3, the coefficient for the unemployment rate is 450.1, the coefficient for number of spring high school graduates is 0.4, and the coefficient for per capita income is 4.3. Therefore, the complete regression equation is Fall Enrollment = -9153.3 + 450.1 * Unemployment Rate + 0.4 * Number of Spring High School Graduates + 4.3 * Per Capita Income. This equation tells us that the predicted fall enrollment for the University of New Mexico will increase by 450.1 students for every one percent increase in the unemployment rate, 0.4 students for every one high school graduate, and 4.3 students for every one dollar of per capita income. 
+</p>
+
+
+
 
 <p style="text-align: justify">
 aaaaaaa
@@ -174,5 +197,9 @@ aaaaaaa
 aaaaaaa
 </p>
 
+
+## Referencias
+[1] Quick, M. (2009) *"R Tutorial Series: Multiple Linear Regression"*. [artículo en línea]. [Fecha de consulta: 09 de mayo del 2018]. 
+< https://www.r-bloggers.com/r-tutorial-series-multiple-linear-regression/ >
 
 
