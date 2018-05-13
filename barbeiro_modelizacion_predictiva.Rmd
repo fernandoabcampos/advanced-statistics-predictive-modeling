@@ -32,33 +32,61 @@ Esta base de datos contiene 157 registros y 13 variables. Las variables son *Cou
 # Loading the dataframe
 df <- read.csv("2016_clean.csv")
 head(df)
+attach(df)
 ```
 
-# 1. Estadística Descriptiva
+# 1. Modelo de regresión lineal
 <div style="text-align: justify">
-*A continuación, se estudiarán algunos valores centrales y de dispersión de algunas variables del fichero. Realizar los pasos que se indican a continuación.*
+Primeramente, estudiaremos como cambia el nivel de felicidad en función de algunas características de cada país.
 </div>
 
-## 1.1 Valores centrales de HS (*Happiness Score*)
+## 1.1 Modelo de regresión lineal múltiple (regresores cuantitativos)
 <p style="text-align: justify">
-Calcular la media, mediana y el sumario de cinco números (de Tukey) del valor HS Happiness Score de toda la muestra. A continuación, visualizar la distribución de este valor en un diagrama de caja (boxplot) e interpretar el resultado. Finalmente, visualizar otro diagrama de caja donde se muestre el valor de HS para cada región. Es decir, en el mismo gráfico debe haber una caja para cada región representada en el fichero. Interpretar los gráficos.
+Estimar por mínimos cuadrados ordinarios un modelo lineal que explique la puntuación de felicidad (HS) de un país en función de tres factores cuantitativos: el indicador de renta por cápita (GpC), la esperanza de vida en salud (LE) y la corrupción (GC).
 </p>
+Evaluar la bondad de ajuste a través del coeficiente de determinación (R2). Podéis usar la instrucción de R *lm*.
+
 ### Respuesta
 ```{r chunck2}
+library(ggplot2)
 
+require(gridExtra)
+a <- ggplot(df, aes(x = GpC, y = HS)) + 
+  geom_point(aes(color = GpC)) + xlab("GpC") + 
+  ggtitle("(a) Happiness Score & Gross per Capita")
+b <- ggplot(df, aes(x = LE, y = HS)) + 
+  geom_point(aes(color = LE)) + xlab("LE") + 
+  ggtitle("(b) Happiness Score & Life Expectancy")
+c <- ggplot(df, aes(x = GC, y = HS)) + 
+  geom_point(aes(color = GC)) + xlab("GC") + 
+  ggtitle("(c) Happiness Score & Government Corruption")
+
+a
+b
+c
+
+
+#Solución del problema
+model <- lm(formula =  HS ~ GpC + LE + GC, data = df)
+model
+summary(model)
 ```
 
 <p style="text-align: justify">
-text
+En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(model)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
 </p>
 
 ```{r chunck3}
 
 ```
 
-##1.2 Cálculos sobre Generosity e identificación de outliers
+## 1.2 Modelo de regresión lineal múltiple (regresores cuantitativos y cualitativos)
 <p style="text-align: justify">
-aaaaaaa
+Estimar por mínimos cuadrados ordinarios un modelo lineal que explique la puntuación de felicidad (HS) de un país en función de cuatro factores. Además de los tres anteriores (renta, esperanza de vida y corrupción) ahora se añade la región del mundo (región). Usar como categoría de referencia la región “*Western Europe*”
+(para ello usar el factor combinado con relevel(region, ref = “*Western Europe*”)).
+</p>
+<p style="text-align: justify">
+Evaluar la bondad del ajuste a través del coeficiente de determinación (R2) y comparar el resultado de este model con el obtenido en el apartado 1.1. Podéis usar la instrucción de R *lm* y usar el coeficiente R-cuadrado ajustado en la comparación. Interpretar también el significado de los coeficientes obtenidos y su significación estadística.
 </p>
 
 ### Respuesta
