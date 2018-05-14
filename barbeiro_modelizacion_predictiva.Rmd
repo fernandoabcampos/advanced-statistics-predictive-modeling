@@ -69,13 +69,13 @@ c
 
 
 #Solución del problema
-model.quant <- lm(formula =  HS ~ GpC + LE + GC, data = df)
-model.quant
-summary(model.quant)
+m1 <- lm(formula =  HS ~ GpC + LE + GC, data = df)
+m1
+summary(m1)
 ```
 
 <p style="text-align: justify">
-En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(model.quant)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
+En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(m1)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
 </p>
 
 ## 1.2 Modelo de regresión lineal múltiple (regresores cuantitativos y cualitativos)
@@ -89,21 +89,25 @@ Evaluar la bondad del ajuste a través del coeficiente de determinación (R2) y 
 
 ### Respuesta
 ```{r chunck3}
-df2 <- within(df, Region <- relevel(Region, ref = "Western Europe"))
-model.qualit <- lm(formula =  df2$HS ~ df2$GpC + df2$LE + df2$GC + df2$Region, data = df2)
-model.qualit
-summary(model.qualit)$r.sq
-summary(model.qualit)
+df2 <- df
+str(df2$Region)
+DF <- within(df2, Region <- relevel(Region, ref = "Western Europe"))
+detach(df)
+attach(df2)
+m2 <- lm(HS ~ GpC + LE + GC + Region, data = df2)
+m2
+summary(m2)$r.sq
+summary(m2)
 
 ```
 <p style="text-align: justify">
-La bondad del ajuste a través del coeficiente de determinación es igual a: **`r summary(model.qualit)$r.sq`**.
+La bondad del ajuste a través del coeficiente de determinación es igual a: **`r summary(m2)$r.sq`**.
 </p>
 
 
 ```{r chunck4}
 models <- c("Apartado 1.1", "Apartado 1.2")
-ajuste <- c(summary(model.quant)$r.sq, summary(model.qualit)$r.sq)
+ajuste <- c(summary(m1)$r.sq, summary(m2)$r.sq)
 dfE <- data.frame('Apartados'=models,'Bondad del Ajuste'=as.vector(ajuste))
 
 library(pander)
@@ -134,8 +138,8 @@ Y una vez definidos tales valores, podemos seguir con la ecuación para el model
 Una vez definida la ecuación, hay que echar un vistazo en los coeficientes de los dos modelos antes interpretar:
 
 ```{r chunck5}
-coef(model.qualit)
-coef(model.quant)
+coef(m1)
+coef(m2)
 ```
 
 <p style="text-align: justify">
@@ -158,9 +162,15 @@ Suponer un país de la región de Europa Occidental (Western Europe), con una re
 ### Respuesta
 
 ```{r chunck6}
+exercise.1.3 <- data.frame(LE=0.69, GC=0.35, GpC=1.5, Region="Western Europe")
+predict(m1, exercise.1.3)
+predict(m2, exercise.1.3)
 
 ```
 
+<p style="text-align: justify">
+Como observamos, para los parámetros de entrada dados, la salida para el primero modelo es **`r predict(m1, exercise.1.3)`** - mientras para el segundo  **`r predict(m1, exercise.1.3)`** - si consideramos que en la medida en que incorporamos un mayor número de variables independientes al modelo, lo hacemos más asertivo (esto es, predece con menos errores) la interpretación es de que la salida del segundo modelo, aunque él sea también más complejo, es la más buena.
+</p>
 
 ##1.4 Cálculos de dispersión manuales
 <p style="text-align: justify">
