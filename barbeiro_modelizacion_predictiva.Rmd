@@ -282,27 +282,17 @@ Algunas interpretaciones de nuestra matriz de confusión:
 <p style="text-align: justify">
 Los errores de tipo II también llamados *falsos negativos* son aquellos que se predice 0 (en nuestro caso, *FALSE*, "no en la lista de los 32 mejores") cuando en realidad era 1 (*TRUE*). Recapitulando la nuestra última actividad: **cuando aceptas una falsa hipótesis nula.**</p>
 
+## 2.5 La selección de los mejores países
+<p style="text-align: justify">
+Establecer un nivel de probabilidad (umbral de discriminación a partir del cual pensáis que el país tiene muchas posibilidades de estar entre los mejores, por ejemplo podéis escoger el 80%). Comparar el nivel de probabilidad que da el modelo con el ránquing del país e identificar los países que no se comportan según lo esperado. Podéis realizar este estudio gráficamente.
+</p>
 #### Respuesta
-### 2.1.1 Escribir la hipótesis nula y alternativa
 
-
-### 2.1.2 Escribir qué tipo de contraste aplicaréis
+## 2.6 Curva ROC
 <p style="text-align: justify">
-aaaaaaa
+Realizar el dibujo de la curva ROC (usando la librería pROC y la instrucción **roc** y el plot del objeto resultante). Calcular AUROC usando también este paquete, auc(...) donde debéis pasar el nombre del objeto roc. Interpretar el resultado.
 </p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-
-### 2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico
-<p style="text-align: justify">
-aaaaaaa
-</p>
-
-
-<p style="text-align: justify">
-aaaaaaa
-</p>
+#### Respuesta
 
 
 ## Referencias

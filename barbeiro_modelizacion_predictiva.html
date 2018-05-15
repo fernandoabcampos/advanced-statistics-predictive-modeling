@@ -150,10 +150,9 @@ $(document).ready(function () {
 </ul></li>
 <li><a href="#calidad-del-ajuste">2.4 Calidad del ajuste</a><ul>
 <li><a href="#respuesta-6">Respuesta</a></li>
-<li><a href="#escribir-la-hipotesis-nula-y-alternativa">2.1.1 Escribir la hipótesis nula y alternativa</a></li>
-<li><a href="#escribir-que-tipo-de-contraste-aplicareis">2.1.2 Escribir qué tipo de contraste aplicaréis</a></li>
-<li><a href="#realizar-los-calculos-del-contraste-de-hipotesis-calcular-el-estadistico-de-contraste-observado-y-el-valor-critico">2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico</a></li>
 </ul></li>
+<li><a href="#la-seleccion-de-los-mejores-paises">2.5 La selección de los mejores países</a></li>
+<li><a href="#curva-roc">2.6 Curva ROC</a></li>
 <li><a href="#referencias">Referencias</a></li>
 </ul></li>
 </ul>
@@ -651,30 +650,24 @@ Algunas interpretaciones de nuestra matriz de confusión:
 <p style="text-align: justify">
 Los errores de tipo II también llamados <em>falsos negativos</em> son aquellos que se predice 0 (en nuestro caso, <em>FALSE</em>, “no en la lista de los 32 mejores”) cuando en realidad era 1 (<em>TRUE</em>). Recapitulando la nuestra última actividad: <strong>cuando aceptas una falsa hipótesis nula.</strong>
 </p>
+</div>
+</div>
+<div id="la-seleccion-de-los-mejores-paises" class="section level2">
+<h2>2.5 La selección de los mejores países</h2>
+<p style="text-align: justify">
+Establecer un nivel de probabilidad (umbral de discriminación a partir del cual pensáis que el país tiene muchas posibilidades de estar entre los mejores, por ejemplo podéis escoger el 80%). Comparar el nivel de probabilidad que da el modelo con el ránquing del país e identificar los países que no se comportan según lo esperado. Podéis realizar este estudio gráficamente.
+</p>
 <div id="respuesta-7" class="section level4">
 <h4>Respuesta</h4>
 </div>
 </div>
-<div id="escribir-la-hipotesis-nula-y-alternativa" class="section level3">
-<h3>2.1.1 Escribir la hipótesis nula y alternativa</h3>
-</div>
-<div id="escribir-que-tipo-de-contraste-aplicareis" class="section level3">
-<h3>2.1.2 Escribir qué tipo de contraste aplicaréis</h3>
+<div id="curva-roc" class="section level2">
+<h2>2.6 Curva ROC</h2>
 <p style="text-align: justify">
-aaaaaaa
+Realizar el dibujo de la curva ROC (usando la librería pROC y la instrucción <strong>roc</strong> y el plot del objeto resultante). Calcular AUROC usando también este paquete, auc(…) donde debéis pasar el nombre del objeto roc. Interpretar el resultado.
 </p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-</div>
-<div id="realizar-los-calculos-del-contraste-de-hipotesis-calcular-el-estadistico-de-contraste-observado-y-el-valor-critico" class="section level3">
-<h3>2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico</h3>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
+<div id="respuesta-8" class="section level4">
+<h4>Respuesta</h4>
 </div>
 </div>
 <div id="referencias" class="section level2">
