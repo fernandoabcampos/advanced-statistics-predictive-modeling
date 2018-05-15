@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load_libraries, include=FALSE}
 library(knitr)
+library(pander)
 #\usepackage{mathtools}
 ```
 # Introducción
@@ -110,7 +111,6 @@ models <- c("Apartado 1.1", "Apartado 1.2")
 ajuste <- c(summary(m1)$r.sq, summary(m2)$r.sq)
 dfE <- data.frame('Apartados'=models,'Bondad del Ajuste'=as.vector(ajuste))
 
-library(pander)
 pander(dfE)
 ```
 
@@ -189,8 +189,10 @@ Evaluar si alguno de los regresores tiene influencia significativa (p-valor del 
 ### Respuesta
 ```{r chunck7}
 df <- read.csv("2016_clean.csv")
-attach(df)
 df$best <- ifelse(df$HR <= 32, TRUE, FALSE)
+attach(df)
+contrasts(best)
+# 0 FOR FALSE / 1 FOR TRUE (FOR THE BEST 32 COUNTRIES)
 m3 <- glm(best ~ GpC + GC,family = binomial, data = df)
 m3
 summary(m3)
@@ -240,18 +242,45 @@ Modelo regresor que añade libertad y región.
 <p style="text-align: justify">
 Decidir si se prefiere el modelo inicial o bien uno de los modelos con freedom, con región, o con ambas. El criterio para decidir el mejor modelo es **AIC**. Cuanto más pequeño es AIC mejor es el modelo.
 </p>
-
+### Respuesta
 ```{r chunck10}
+m4 <- glm(best ~ GpC + GC + Freedom, family = binomial, data = df)
+m5 <- glm(best ~ GpC + GC + Region, family = binomial, data = df)
+m6 <- glm(best ~ GpC + GC + Freedom + Region, family = binomial, data = df)
 
+models.id <- c("m3", "m4", "m5", "m6")
+models <- c("Inicial (GpC + GC)", "Inicial + Freedom", "Inicial + Region", "Inicial + Freedom + Region")
+aics <- c(AIC(m3), AIC(m4), AIC(m5), AIC(m6))
+
+pander(data.frame('ID'=models.id, 'Modelos'=models,'AIC'=as.vector(aics)))
 ```
-</p>
-##1.4 Cálculos de dispersión manuales
 <p style="text-align: justify">
-aaaaaaa
+Dados los requerimientos (*cuanto más pequeño es AIC mejor es el modelo*) desde mi punto de vista, el último modelo **m6** incluyendo *GpC + GC + Freedom + Region* es el más adecuado.
 </p>
+
+## 2.4 Calidad del ajuste
 <p style="text-align: justify">
-aaaaaaa
+Calcular la matriz de confusión del mejor modelo del apartado 2.3 suponiendo un umbral de discriminación del 80%. Observad cuantos falsos negativos hay e interpretar qué es un falso negativo en este contexto.
 </p>
+### Respuesta
+```{r chunck11}
+model.probs = predict(m6, type="response")
+
+model.pred = rep(FALSE, nrow(df)) #1st crear un vector de N FALSE elementos.
+threshold <- 0.8 # suponiendo un umbral de discriminación del 80%
+model.pred[model.probs >= threshold] = TRUE # Transformar a TRUE predicciones que superan probabilidad del umbral.
+
+# Crear la matriz de confusión
+table(model.pred, best)
+```
+<p style="text-align: justify">
+Algunas interpretaciones de nuestra matriz de confusión:
+</p>
+  + **Precisión**: aciertos / casos totales: (123 + 20)/`r nrow(df)` = `r (123 + 20)/nrow(df)`
+
+
+<p style="text-align: justify">
+Los errores de tipo II también llamados *falsos negativos* son aquellos que se predice 0 (en nuestro caso, *FALSE*, "no en la lista de los 32 mejores") cuando en realidad era 1 (*TRUE*). Recapitulando la nuestra última actividad: **cuando aceptas una falsa hipótesis nula.**</p>
 
 #### Respuesta
 ### 2.1.1 Escribir la hipótesis nula y alternativa
@@ -270,9 +299,7 @@ aaaaaaa
 aaaaaaa
 </p>
 
-```{r chunck11}
 
-```
 <p style="text-align: justify">
 aaaaaaa
 </p>

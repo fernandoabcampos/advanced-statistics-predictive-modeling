@@ -145,8 +145,11 @@ $(document).ready(function () {
 <li><a href="#prediccion-en-el-modelo-lineal-generalizado-modelo-de-regresion-logistica">2.2 Predicción en el modelo lineal generalizado (modelo de regresión logística)</a><ul>
 <li><a href="#respuesta-4">Respuesta</a></li>
 </ul></li>
-<li><a href="#mejora-del-modelo">2.3 Mejora del modelo</a></li>
-<li><a href="#calculos-de-dispersion-manuales">1.4 Cálculos de dispersión manuales</a><ul>
+<li><a href="#mejora-del-modelo">2.3 Mejora del modelo</a><ul>
+<li><a href="#respuesta-5">Respuesta</a></li>
+</ul></li>
+<li><a href="#calidad-del-ajuste">2.4 Calidad del ajuste</a><ul>
+<li><a href="#respuesta-6">Respuesta</a></li>
 <li><a href="#escribir-la-hipotesis-nula-y-alternativa">2.1.1 Escribir la hipótesis nula y alternativa</a></li>
 <li><a href="#escribir-que-tipo-de-contraste-aplicareis">2.1.2 Escribir qué tipo de contraste aplicaréis</a></li>
 <li><a href="#realizar-los-calculos-del-contraste-de-hipotesis-calcular-el-estadistico-de-contraste-observado-y-el-valor-critico">2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico</a></li>
@@ -352,7 +355,6 @@ La bondad del ajuste a través del coeficiente de determinación es igual a: <st
 ajuste &lt;- c(summary(m1)$r.sq, summary(m2)$r.sq)
 dfE &lt;- data.frame('Apartados'=models,'Bondad del Ajuste'=as.vector(ajuste))
 
-library(pander)
 pander(dfE)</code></pre>
 <table style="width:47%;">
 <colgroup>
@@ -475,12 +477,17 @@ Evaluar si alguno de los regresores tiene influencia significativa (p-valor del 
 <div id="respuesta-3" class="section level3">
 <h3>Respuesta</h3>
 <pre class="r"><code>df &lt;- read.csv(&quot;2016_clean.csv&quot;)
+df$best &lt;- ifelse(df$HR &lt;= 32, TRUE, FALSE)
 attach(df)</code></pre>
 <pre><code>## The following objects are masked from df2:
 ## 
 ##     Country, DR, Family, Freedom, GC, Generosity, GpC, HR, HS,
 ##     LCI, LE, Region, UCI</code></pre>
-<pre class="r"><code>df$best &lt;- ifelse(df$HR &lt;= 32, TRUE, FALSE)
+<pre class="r"><code>contrasts(best)</code></pre>
+<pre><code>##       TRUE
+## FALSE    0
+## TRUE     1</code></pre>
+<pre class="r"><code># 0 FOR FALSE / 1 FOR TRUE (FOR THE BEST 32 COUNTRIES)
 m3 &lt;- glm(best ~ GpC + GC,family = binomial, data = df)
 m3</code></pre>
 <pre><code>## 
@@ -564,18 +571,89 @@ Modelo regresor que añade libertad y región.
 <p style="text-align: justify">
 Decidir si se prefiere el modelo inicial o bien uno de los modelos con freedom, con región, o con ambas. El criterio para decidir el mejor modelo es <strong>AIC</strong>. Cuanto más pequeño es AIC mejor es el modelo.
 </p>
+<div id="respuesta-5" class="section level3">
+<h3>Respuesta</h3>
+<pre class="r"><code>m4 &lt;- glm(best ~ GpC + GC + Freedom, family = binomial, data = df)
+m5 &lt;- glm(best ~ GpC + GC + Region, family = binomial, data = df)
+m6 &lt;- glm(best ~ GpC + GC + Freedom + Region, family = binomial, data = df)
+
+models.id &lt;- c(&quot;m3&quot;, &quot;m4&quot;, &quot;m5&quot;, &quot;m6&quot;)
+models &lt;- c(&quot;Inicial (GpC + GC)&quot;, &quot;Inicial + Freedom&quot;, &quot;Inicial + Region&quot;, &quot;Inicial + Freedom + Region&quot;)
+aics &lt;- c(AIC(m3), AIC(m4), AIC(m5), AIC(m6))
+
+pander(data.frame('ID'=models.id, 'Modelos'=models,'AIC'=as.vector(aics)))</code></pre>
+<table style="width:57%;">
+<colgroup>
+<col width="6%"></col>
+<col width="40%"></col>
+<col width="9%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">ID</th>
+<th align="center">Modelos</th>
+<th align="center">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">m3</td>
+<td align="center">Inicial (GpC + GC)</td>
+<td align="center">98.85</td>
+</tr>
+<tr class="even">
+<td align="center">m4</td>
+<td align="center">Inicial + Freedom</td>
+<td align="center">84.91</td>
+</tr>
+<tr class="odd">
+<td align="center">m5</td>
+<td align="center">Inicial + Region</td>
+<td align="center">77.66</td>
+</tr>
+<tr class="even">
+<td align="center">m6</td>
+<td align="center">Inicial + Freedom + Region</td>
+<td align="center">76.43</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: justify">
+Dados los requerimientos (<em>cuanto más pequeño es AIC mejor es el modelo</em>) desde mi punto de vista, el último modelo <strong>m6</strong> incluyendo <em>GpC + GC + Freedom + Region</em> es el más adecuado.
 </p>
 </div>
-<div id="calculos-de-dispersion-manuales" class="section level2">
-<h2>1.4 Cálculos de dispersión manuales</h2>
+</div>
+<div id="calidad-del-ajuste" class="section level2">
+<h2>2.4 Calidad del ajuste</h2>
 <p style="text-align: justify">
-aaaaaaa
+Calcular la matriz de confusión del mejor modelo del apartado 2.3 suponiendo un umbral de discriminación del 80%. Observad cuantos falsos negativos hay e interpretar qué es un falso negativo en este contexto.
 </p>
+<div id="respuesta-6" class="section level3">
+<h3>Respuesta</h3>
+<pre class="r"><code>model.probs = predict(m6, type=&quot;response&quot;)
+
+model.pred = rep(FALSE, nrow(df)) #1st crear un vector de N FALSE elementos.
+threshold &lt;- 0.8 # suponiendo un umbral de discriminación del 80%
+model.pred[model.probs &gt;= threshold] = TRUE # Transformar a TRUE predicciones que superan probabilidad del umbral.
+
+# Crear la matriz de confusión
+table(model.pred, best)</code></pre>
+<pre><code>##           best
+## model.pred FALSE TRUE
+##      FALSE   123   12
+##      TRUE      2   20</code></pre>
 <p style="text-align: justify">
-aaaaaaa
+Algunas interpretaciones de nuestra matriz de confusión:
 </p>
-<div id="respuesta-5" class="section level4">
+<ul>
+<li><strong>Precisión</strong>: aciertos / casos totales: (123 + 20)/157 = 0.910828</li>
+</ul>
+<p style="text-align: justify">
+Los errores de tipo II también llamados <em>falsos negativos</em> son aquellos que se predice 0 (en nuestro caso, <em>FALSE</em>, “no en la lista de los 32 mejores”) cuando en realidad era 1 (<em>TRUE</em>). Recapitulando la nuestra última actividad: <strong>cuando aceptas una falsa hipótesis nula.</strong>
+</p>
+<div id="respuesta-7" class="section level4">
 <h4>Respuesta</h4>
+</div>
 </div>
 <div id="escribir-la-hipotesis-nula-y-alternativa" class="section level3">
 <h3>2.1.1 Escribir la hipótesis nula y alternativa</h3>
