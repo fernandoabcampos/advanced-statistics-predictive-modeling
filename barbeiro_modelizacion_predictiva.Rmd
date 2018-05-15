@@ -2,7 +2,7 @@
 title: "Actividad 3 - Modelización predictiva"
 author: "Fernando Antonio Barbeiro Campos - fbarbeiro@uoc.edu"
 
-date: '`r format(Sys.Date(),"%e de %B, %Y")`'
+date: '`r format(Sys.Date(),"%e %B, %Y")`'
 output:
   html_document:
     toc: yes
@@ -172,6 +172,25 @@ predict(m2, exercise.1.3)
 Como observamos, para los parámetros de entrada dados, la salida para el primero modelo es **`r predict(m1, exercise.1.3)`** - mientras para el segundo  **`r predict(m1, exercise.1.3)`** - si consideramos que en la medida en que incorporamos un mayor número de variables independientes al modelo, lo hacemos más asertivo (esto es, predece con menos errores) la interpretación es de que la salida del segundo modelo, aunque él sea también más complejo, es la más buena.
 </p>
 
+<hr />
+# 2. Modelo de regresión logística
+<p style="text-align: justify">
+Se desea evaluar el fenómeno de la felicidad desde un punto de vista de qué países son los 32 más felices. Por tanto, se evaluará la probabilidad de que un país del mundo esté entre este grupo de los 32 más felices. Para evaluar esta probabilidad se aplicará un modelo de regresión logística, donde la variable depediente será una variable binaria que indicará si el país tiene un lugar en el ránquing de los mejores 32 (donde la posición 32 está incluida). Se usará la muestra disponible para estimar el modelo con las mismas variables que en el modelo 1.1.
+</p>
+## 2.1 Estimación de un modelo de regresión logística
+
+<p style="text-align: justify">
+Estimar el modelo de regresión logística donde la variable dependiente es “best” y las explicativas son el indicador de renta por cápita (GpC) y la corrupción (GC). No incluimos la esperanza de vida puesto que pensamos que queda ya representada con la riqueza en la renta por cápita.
+</p>
+<p style="text-align: justify">
+Evaluar si alguno de los regresores tiene influencia significativa (p-valor del contraste individual inferior al 5%).
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
 ##1.4 Cálculos de dispersión manuales
 <p style="text-align: justify">
 aaaaaaa
@@ -183,23 +202,6 @@ aaaaaaa
 ```{r chunck7}
 
 ```
-<hr />
-# 2. Estadística Inferencial
-<div style="text-align: justify">
-
-## 2.1 Media de HS de todos los países
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
 
 #### Respuesta
 ### 2.1.1 Escribir la hipótesis nula y alternativa

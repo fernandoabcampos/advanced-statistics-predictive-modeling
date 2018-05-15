@@ -120,7 +120,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Actividad 3 - Modelización predictiva</h1>
 <h4 class="author"><em>Fernando Antonio Barbeiro Campos - <a href="mailto:fbarbeiro@uoc.edu">fbarbeiro@uoc.edu</a></em></h4>
-<h4 class="date"><em>14 de May, 2018</em></h4>
+<h4 class="date"><em>14 May, 2018</em></h4>
 
 </div>
 
@@ -137,12 +137,11 @@ $(document).ready(function () {
 <li><a href="#efectuar-una-prediccion-del-indice-de-felicidad-en-los-dos-modelos">1.3 Efectuar una predicción del índice de felicidad en los dos modelos</a><ul>
 <li><a href="#respuesta-2">Respuesta</a></li>
 </ul></li>
+</ul></li>
+<li><a href="#modelo-de-regresion-logistica">2. Modelo de regresión logística</a><ul>
+<li><a href="#estimacion-de-un-modelo-de-regresion-logistica">2.1 Estimación de un modelo de regresión logística</a></li>
 <li><a href="#calculos-de-dispersion-manuales">1.4 Cálculos de dispersión manuales</a><ul>
 <li><a href="#respuesta-3">Respuesta</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#estadistica-inferencial">2. Estadística Inferencial</a><ul>
-<li><a href="#media-de-hs-de-todos-los-paises">2.1 Media de HS de todos los países</a><ul>
 <li><a href="#escribir-la-hipotesis-nula-y-alternativa">2.1.1 Escribir la hipótesis nula y alternativa</a></li>
 <li><a href="#escribir-que-tipo-de-contraste-aplicareis">2.1.2 Escribir qué tipo de contraste aplicaréis</a></li>
 <li><a href="#realizar-los-calculos-del-contraste-de-hipotesis-calcular-el-estadistico-de-contraste-observado-y-el-valor-critico">2.1.3 Realizar los cálculos del contraste de hipótesis: calcular el estadístico de contraste observado y el valor crítico</a></li>
@@ -451,7 +450,29 @@ predict(m1, exercise.1.3)</code></pre>
 <p style="text-align: justify">
 Como observamos, para los parámetros de entrada dados, la salida para el primero modelo es <strong>6.6880893</strong> - mientras para el segundo <strong>6.6880893</strong> - si consideramos que en la medida en que incorporamos un mayor número de variables independientes al modelo, lo hacemos más asertivo (esto es, predece con menos errores) la interpretación es de que la salida del segundo modelo, aunque él sea también más complejo, es la más buena.
 </p>
+<hr />
 </div>
+</div>
+</div>
+<div id="modelo-de-regresion-logistica" class="section level1">
+<h1>2. Modelo de regresión logística</h1>
+<p style="text-align: justify">
+Se desea evaluar el fenómeno de la felicidad desde un punto de vista de qué países son los 32 más felices. Por tanto, se evaluará la probabilidad de que un país del mundo esté entre este grupo de los 32 más felices. Para evaluar esta probabilidad se aplicará un modelo de regresión logística, donde la variable depediente será una variable binaria que indicará si el país tiene un lugar en el ránquing de los mejores 32 (donde la posición 32 está incluida). Se usará la muestra disponible para estimar el modelo con las mismas variables que en el modelo 1.1.
+</p>
+<div id="estimacion-de-un-modelo-de-regresion-logistica" class="section level2">
+<h2>2.1 Estimación de un modelo de regresión logística</h2>
+<p style="text-align: justify">
+Estimar el modelo de regresión logística donde la variable dependiente es “best” y las explicativas son el indicador de renta por cápita (GpC) y la corrupción (GC). No incluimos la esperanza de vida puesto que pensamos que queda ya representada con la riqueza en la renta por cápita.
+</p>
+<p style="text-align: justify">
+Evaluar si alguno de los regresores tiene influencia significativa (p-valor del contraste individual inferior al 5%).
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
+<p style="text-align: justify">
+aaaaaaa
+</p>
 </div>
 <div id="calculos-de-dispersion-manuales" class="section level2">
 <h2>1.4 Cálculos de dispersión manuales</h2>
@@ -463,30 +484,9 @@ aaaaaaa
 </p>
 <div id="respuesta-3" class="section level3">
 <h3>Respuesta</h3>
-<hr />
-</div>
-</div>
-</div>
-<div id="estadistica-inferencial" class="section level1">
-<h1>2. Estadística Inferencial</h1>
-<div style="text-align: justify">
-
-<div id="media-de-hs-de-todos-los-paises" class="section level2">
-<h2>2.1 Media de HS de todos los países</h2>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
-<p style="text-align: justify">
-aaaaaaa
-</p>
 <div id="respuesta-4" class="section level4">
 <h4>Respuesta</h4>
+</div>
 </div>
 <div id="escribir-la-hipotesis-nula-y-alternativa" class="section level3">
 <h3>2.1.1 Escribir la hipótesis nula y alternativa</h3>
