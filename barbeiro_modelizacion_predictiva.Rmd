@@ -185,11 +185,65 @@ Estimar el modelo de regresión logística donde la variable dependiente es “b
 <p style="text-align: justify">
 Evaluar si alguno de los regresores tiene influencia significativa (p-valor del contraste individual inferior al 5%).
 </p>
+
+### Respuesta
+```{r chunck7}
+df <- read.csv("2016_clean.csv")
+attach(df)
+df$best <- ifelse(df$HR <= 32, TRUE, FALSE)
+m3 <- glm(best ~ GpC + GC,family = binomial, data = df)
+m3
+summary(m3)
+```
+
+Sobre la influencia significativa, observamos que **GC** tiene p-valor de apenas **`r coef(summary(m3))[row.names(coef(summary(m3))) %in% "GC" , 4]`** 
+```{r chunck8}
+coef(summary(m3))[row.names(coef(summary(m3))) %in% "GC" , 4]
+coef(summary(m3))[row.names(coef(summary(m3))) %in% "GpC" , 4]
+```
+
+
+## 2.2 Predicción en el modelo lineal generalizado (modelo de regresión logística)
 <p style="text-align: justify">
-aaaaaaa
+Usando el modelo anterior, calculad la probabilidad de ser uno dels 32 países más felices del mundo para un país que tiene una renta de 1.5, y un índice de corrupción de 0.35.
+</p>
+### Respuesta
+```{r chunck9}
+new.df <- data.frame(GpC = 1.5, GC = 0.35)
+predict(m3, new.df, type = "response")
+```
+<p style="text-align: justify">
+Basado en los resultados, la probabilidad es de **`r predict(m3, new.df, type = "response")`**. 
 </p>
 <p style="text-align: justify">
-aaaaaaa
+Si nos concentramos un poco en el *dataframe* inicial, hay un país que tiene condiciones muy parecidas a estas. Miramos:
+</p>
+![Figura 2: Paises con grado de similitud a las variables de los regresores](2.png)
+<p style="text-align: justify">
+Aunque no tengamos una situación totalmente igual, podemos notar que la mayoría de los países con variables de GpC y GC alrededor de los valores pasados suelen estar entre los 32 países más felices (o muy cerca de llegar a esto, como Saudi Arabia). Posteriormente vamos a investigar si hay como mejorar las estimativas.
+</p>
+
+
+## 2.3 Mejora del modelo
+<p style="text-align: justify">
+Buscar un modelo mejor al anterior añadiendo más variables explicativas. Se realizarán las siguientes pruebas:
+</p>
+<p style="text-align: justify">
+Modelo regresor que añade al anterior la variable libertad (Freedom).
+</p>
+<p style="text-align: justify">
+Modelo regresor que añade la región.
+</p>
+<p style="text-align: justify">
+Modelo regresor que añade libertad y región.
+</p>
+<p style="text-align: justify">
+Decidir si se prefiere el modelo inicial o bien uno de los modelos con freedom, con región, o con ambas. El criterio para decidir el mejor modelo es **AIC**. Cuanto más pequeño es AIC mejor es el modelo.
+</p>
+
+```{r chunck10}
+
+```
 </p>
 ##1.4 Cálculos de dispersión manuales
 <p style="text-align: justify">
@@ -198,10 +252,6 @@ aaaaaaa
 <p style="text-align: justify">
 aaaaaaa
 </p>
-### Respuesta
-```{r chunck7}
-
-```
 
 #### Respuesta
 ### 2.1.1 Escribir la hipótesis nula y alternativa
@@ -220,7 +270,7 @@ aaaaaaa
 aaaaaaa
 </p>
 
-```{r chunck8}
+```{r chunck11}
 
 ```
 <p style="text-align: justify">

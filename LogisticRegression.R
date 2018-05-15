@@ -18,6 +18,12 @@ coef(summary(m3))[row.names(coef(summary(m3))) %in% "GC" , 4]
 coef(summary(m3))[row.names(coef(summary(m3))) %in% "GpC" , 4]
 
 
+new.df <- data.frame(GpC = 1.5, GC = 0.35)
+predict(m3, new.df, type = "response")
+
+
+
+
 #https://stats.stackexchange.com/questions/52475/how-are-the-p-values-of-the-glm-in-r-calculated/52476
 
 ####
