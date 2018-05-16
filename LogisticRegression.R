@@ -1,10 +1,9 @@
 # Logistic Regression exercises
-library(knitr)
 
 df <- read.csv("2016_clean.csv")
-attach(df)
-df$best <- ifelse(df$HR <=32, TRUE, FALSE)
 detach(df)
+df$best <- ifelse(df$HR <=32, TRUE, FALSE)
+attach(df)
 m3 <- glm(best ~ GpC + GC,family = binomial, data = df)
 m3
 summary(m3)
@@ -53,6 +52,12 @@ model.pred = rep(FALSE, nrow(df))
 threshold <- 0.8 # suponiendo un umbral de discriminación del 80%
 model.pred[model.probs >= threshold] = TRUE
 table(model.pred, best)
+
+df$predicted <- model.probs
+detach(df)
+attach(df)
+
+
 
 
 #https://stats.stackexchange.com/questions/52475/how-are-the-p-values-of-the-glm-in-r-calculated/52476

@@ -92,7 +92,7 @@ Evaluar la bondad del ajuste a través del coeficiente de determinación (R2) y 
 ```{r chunck3}
 df2 <- df
 str(df2$Region)
-DF <- within(df2, Region <- relevel(Region, ref = "Western Europe"))
+df2 <- within(df2, Region <- relevel(Region, ref = "Western Europe"))
 detach(df)
 attach(df2)
 m2 <- lm(HS ~ GpC + LE + GC + Region, data = df2)
