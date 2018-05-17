@@ -286,13 +286,43 @@ Los errores de tipo II también llamados *falsos negativos* son aquellos que se 
 <p style="text-align: justify">
 Establecer un nivel de probabilidad (umbral de discriminación a partir del cual pensáis que el país tiene muchas posibilidades de estar entre los mejores, por ejemplo podéis escoger el 80%). Comparar el nivel de probabilidad que da el modelo con el ránquing del país e identificar los países que no se comportan según lo esperado. Podéis realizar este estudio gráficamente.
 </p>
-#### Respuesta
+### Respuesta
+```{r, out.width="1000px", out.height="1000px"}
+df$predicted = model.probs
+detach(df)
+detach(df2)
+df.filtered <- df[which(df$predicted >=threshold),]
+attach(df.filtered)
+with(df.filtered, plot(HR ~ predicted, col = ifelse(HR > 32,'red','green'), pch = 19))
+text(HR ~ predicted, labels=paste(HR, "-", Country), cex= 0.4)
+```
+<p style="text-align: justify">
+Para destacar las predicciones con un umbral de `r threshold*100`% que no eran adecuadas, he puesto colores en rojo y podemos notar dos ocurrencias. Sin embargo, estas no son el único error del modelo - hay valores que deberían tener sido predecidos como Best Country y no fueron.
+</p>
+<p style="text-align: justify">
+Para intentar una otra aproximación e investigar de una nueva perspectiva, también voy a extraer los datos de un otro modelo (anteriormente definido m5).
+</p>
+```{r, out.width="1000px", out.height="1000px"}
+model.probsM5 = predict(m5, type="response")
+model.predM5 = rep(FALSE, nrow(df)) #1st crear un vector de N FALSE elementos.
+model.predM5[model.probsM5 >= threshold] = TRUE # Transformar a TRUE predicciones que superan probabilidad del umbral.
+detach(df.filtered)
+attach(df)
 
+df$predictedM5 = model.probsM5
+detach(df)
+df.filteredM5 <- df[which(df$predictedM5 >=threshold),]
+attach(df.filteredM5)
+with(df.filteredM5, plot(HR ~ predictedM5, col = ifelse(HR > 32,'red','green'), pch = 19))
+text(HR ~ predictedM5, labels=paste(HR, "-", Country), cex= 0.4)
+```
+<p style="text-align: justify">
+Como se nota, hubo pocos cambios en el resultado anterior - ahora en vez de 2 ítems incorrectos, tenemos solamente 1, sumando que el threshold sigue el mismo, podemos decir que la previsión ha sido más asertiva.</p>
 ## 2.6 Curva ROC
 <p style="text-align: justify">
 Realizar el dibujo de la curva ROC (usando la librería pROC y la instrucción **roc** y el plot del objeto resultante). Calcular AUROC usando también este paquete, auc(...) donde debéis pasar el nombre del objeto roc. Interpretar el resultado.
 </p>
-#### Respuesta
+### Respuesta
 
 
 ## Referencias
