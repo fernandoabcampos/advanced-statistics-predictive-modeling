@@ -320,7 +320,7 @@ text(HR ~ predictedM5, labels=paste(HR, "-", Country), cex= 0.4)
 Como se nota, hubo pocos cambios en el resultado anterior - ahora en vez de 2 ítems incorrectos, tenemos solamente 1, sumando que el threshold sigue el mismo, podemos decir que la previsión ha sido más asertiva.</p>
 ## 2.6 Curva ROC
 <p style="text-align: justify">
-Realizar el dibujo de la curva ROC (usando la librería pROC y la instrucción **roc** y el plot del objeto resultante). Calcular AUROC usando también este paquete, auc(...) donde debéis pasar el nombre del objeto roc. Interpretar el resultado.
+Realizar el dibujo de la curva ROC (usando la librería pROC [4] y la instrucción **roc** y el plot del objeto resultante). Calcular AUROC usando también este paquete, auc(...) donde debéis pasar el nombre del objeto roc. Interpretar el resultado.
 </p>
 ### Respuesta
 
@@ -337,6 +337,11 @@ https://www.theanalysisfactor.com/interpreting-regression-coefficients/
 <p style="text-align: justify">
 [3] Schweiger (2016) - University of Bayreuth *"Can I use Pearson’s correlation coefficient to know the relation between perception and gender, age, income?"* [artículo en línea]. [Fecha de consulta: 10 de mayo del 2018]. 
 https://www.researchgate.net/post/Can_I_use_Pearsons_correlation_coefficient_to_know_the_relation_between_perception_and_gender_age_income
+</p>
+<p style="text-align: justify">
+[4] Xavier Robin, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez and Markus Müller (2011). pROC: an
+  open-source package for R and S+ to analyze and compare ROC curves. BMC Bioinformatics, 12, p. 77.  DOI: 10.1186/1471-2105-12-77
+  <http://www.biomedcentral.com/1471-2105/12/77/>
 </p>
 
 
