@@ -12,7 +12,3 @@ roc_df <- data.frame(
   labels=roc_obj$response, 
   scores=roc_obj$predictor)
 
-
-
-
-
