@@ -76,7 +76,7 @@ summary(m1)
 ```
 
 <p style="text-align: justify">
-En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(m1)$r.sq`** como *ajuste del coeficiente de determinación (R2)*.
+En las output arriba tenemos nuestro modelo y, además, en la salida del summary, podemos observar **`r summary(m1)$r.sq`** como *ajuste del coeficiente de determinación (R2)* - tenendo en cuenta que R2 ajustado es *Adjusted R-squared:  0.6856*.
 </p>
 
 ## 1.2 Modelo de regresión lineal múltiple (regresores cuantitativos y cualitativos)
@@ -324,7 +324,40 @@ Realizar el dibujo de la curva ROC (usando la librería pROC [4] y la instrucci�
 </p>
 ### Respuesta
 
+```{r}
+library(pROC)
+g6 <- roc(best ~ model.probs, data = df)
+plot(g6)
+auc(g6)
+```
 
+<p style="text-align: justify">
+Como efecto de investigación, haré como en el apartado anterior y también investigaré la curva ROC del modelo m5.
+</p>
+```{r}
+g5 <- roc(best ~ model.probsM5, data = df)
+plot(g5)
+auc(g5)
+```
+
+
+
+<p style="text-align: justify">
+La curva ROC (*Receiver Operator Characteristic*) empieza del punto 0,0 (representando un umbral de 1%) y su representación gráfica se distribuye en los ejes X e Y sindo X la especificidad (o tasa de falsos negativos) e Y de la sensibilidad (o tasa de positivos). Se puede aplicar en un sistema clasificador binario según se varía el umbral de discriminación. Conforme se va elevando la curva, la sensibilidad también aumenta de manera que se puedan identificar y clasificar como positivo algunos casos.
+</p>
+<p style="text-align: justify">
+Según el blog bigdatadummy (2017) [5], otra interpretación del gráfico es la representación del **ratio de verdaderos positivos** frente al **ratio de falsos positivos** también según se varía el umbral de discriminación (valor a partir del cual decidimos que un caso es un positivo).
+</p>
+#### *Area Under de Curve* (AUC)
+<p style="text-align: justify">
+Finalmente, pero no menos importante, el tema de la Área bajo la curva ROC, la manera que usamos para saber si un modelo es bueno o no sería usando AUC, que en resumén, representa la precisión de un modelo por una medida absoluta de la calidad de las predicciones.
+</p>
+<p style="text-align: justify">
+Teniendo en cuenta que 100% de precisión es el equivalente a tener una AUC de 1, se nota que los 2 modelos tienen una calidad bastante parecidas, siendo m6 = **`r auc(g6)`** y m5 = **`r auc(g5)`**.
+</p>
+
+
+<hr>
 ## Referencias
 <p style="text-align: justify">
 [1] Quick, M. (2009) *"R Tutorial Series: Multiple Linear Regression"*. [artículo en línea]. [Fecha de consulta: 09 de mayo del 2018]. 
@@ -339,9 +372,10 @@ https://www.theanalysisfactor.com/interpreting-regression-coefficients/
 https://www.researchgate.net/post/Can_I_use_Pearsons_correlation_coefficient_to_know_the_relation_between_perception_and_gender_age_income
 </p>
 <p style="text-align: justify">
-[4] Xavier Robin, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez and Markus Müller (2011). pROC: an
-  open-source package for R and S+ to analyze and compare ROC curves. BMC Bioinformatics, 12, p. 77.  DOI: 10.1186/1471-2105-12-77
+[4] Xavier Robin, Natacha Turck, Alexandre Hainard, Natalia Tiberti, Frédérique Lisacek, Jean-Charles Sanchez and Markus Müller (2011). *"pROC: an open-source package for R and S+ to analyze and compare ROC curves."* BMC Bioinformatics, 12, p. 77.  DOI: 10.1186/1471-2105-12-77 [artículo en línea]. [Fecha de consulta: 13 de mayo del 2018]. 
   <http://www.biomedcentral.com/1471-2105/12/77/>
 </p>
-
+<p style="text-align: justify">
+[5] BigDataDummy (2017). Regresión logística [artículo en línea]. [Fecha de consulta: 15 de mayo del 2018].  <https://bigdatadummy.com/2017/09/19/regresion-logistica/>
+</p>
 
