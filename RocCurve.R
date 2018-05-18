@@ -23,3 +23,13 @@ auc(g5)
 detach(df)
 
 
+# ANOTHER APPROACH
+library(ROCR)
+pr <- prediction(model.probsM5, best)
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+plot(prf)
+
+auc <- performance(pr, measure = "auc")
+auc <- auc@y.values[[1]]
+auc
+
